@@ -101,7 +101,7 @@ image smooth_image(image im, float sigma)
     } else {
         // TODO: optional, use two convolutions with 1d gaussian filter.
         // If you implement, disable the above if check.
-        return s2;
+        return copy_image(im);
     }
 }
 
