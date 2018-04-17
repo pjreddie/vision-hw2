@@ -117,6 +117,17 @@ image structure_matrix(image im, float sigma)
     return S;
 }
 
+// Estimate the cornerness of each pixel given a structure matrix S.
+// image S: structure matrix for an image.
+// returns: a response map of cornerness calculations.
+image cornerness_response(image S)
+{
+    image R = make_image(S.w, S.h, 1);
+    // TODO: fill in R, "cornerness" for each pixel using the structure matrix.
+    // We'll use formulation det(S) - alpha * trace(S), alpha = .06.
+    return R;
+}
+
 // Perform non-max supression on an image of feature responses.
 // image im: 1-channel image of feature responses.
 // int w: distance to look for larger responses.
@@ -132,18 +143,6 @@ image nms_image(image im, int w)
     return r;
 }
 
-// Find and draw corners on an image.
-// image im: input image.
-// float sigma: std. dev for harris.
-// float thresh: threshold for cornerness.
-// int nms: distance to look for local-maxes in response map.
-void detect_and_draw_corners(image im, float sigma, float thresh, int nms)
-{
-    int n = 0;
-    descriptor *d = harris_corner_detector(im, sigma, thresh, nms, &n);
-    mark_corners(im, d, n);
-}
-
 // Perform harris corner detection and extract features from the corners.
 // image im: input image.
 // float sigma: std. dev for harris.
@@ -153,11 +152,11 @@ void detect_and_draw_corners(image im, float sigma, float thresh, int nms)
 // returns: array of descriptors of the corners in the image.
 descriptor *harris_corner_detector(image im, float sigma, float thresh, int nms, int *n)
 {
-    int i;
+    // Calculate structure matrix
     image S = structure_matrix(im, sigma);
-    image R = make_image(im.w, im.h, 1);
-    // TODO: fill in R, "cornerness" for each pixel using the structure matrix.
-    // We'll use formulation det(S) - alpha * trace(S), alpha = .06.
+
+    // Estimate cornerness
+    image R = cornerness_response(S);
 
     // Run NMS on the responses
     image Rnms = nms_image(R, nms);
@@ -165,7 +164,6 @@ descriptor *harris_corner_detector(image im, float sigma, float thresh, int nms,
 
     //TODO: count number of responses over threshold
     int count = 1; // change this
-
 
     
     *n = count; // <- set *n equal to number of corners in image.
@@ -177,4 +175,16 @@ descriptor *harris_corner_detector(image im, float sigma, float thresh, int nms,
     free_image(R);
     free_image(Rnms);
     return d;
+}
+
+// Find and draw corners on an image.
+// image im: input image.
+// float sigma: std. dev for harris.
+// float thresh: threshold for cornerness.
+// int nms: distance to look for local-maxes in response map.
+void detect_and_draw_corners(image im, float sigma, float thresh, int nms)
+{
+    int n = 0;
+    descriptor *d = harris_corner_detector(im, sigma, thresh, nms, &n);
+    mark_corners(im, d, n);
 }
