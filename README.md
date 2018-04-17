@@ -1,3 +1,5 @@
+![panorama of field](figs/field_panorama.png)
+
 # CSE 455 Homework 2 #
 
 Welcome friends,
@@ -35,6 +37,7 @@ So we'll find the corner points in an image using a Harris corner detector. Then
 First we need to find those corners!
 
 ## 1. Harris corner detection ##
+
 
 
 ## IN PROGRESS ##
