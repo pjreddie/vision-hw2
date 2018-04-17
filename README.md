@@ -90,7 +90,7 @@ Table example
 
 Corners                   |  Matches                  | Stitching
 :-------------------------:|:-------------------------:|:--------------------|
-![](figs/corners.jpg)     | ![](figs/matches.jpg)     | ![](figs/easy_panorama.jpg)
+![](figs/corners.jpg)     | ![](figs/matches.jpg)     | ![](figs/easy_panorama.jpg) |
 
 
 ## 5. Turn it in ##
