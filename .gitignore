@@ -1,0 +1,17 @@
+*.o
+*.dSYM
+*.csv
+*.out
+*.pyc
+.fuse*
+libuwimg*
+uwimg
+*.png
+*.jpg
+
+# OS Generated #
+.DS_Store*
+ehthumbs.db
+Icon?
+Thumbs.db
+*.swp
