@@ -6,6 +6,37 @@ It's time for assignment 2! This one may be a little harder than the last one so
 
 To start out this homework, copy over your `process_image.c`, `filter_image.c`, and `resize_image.c` file from hw1 to the `src` file in this homework. We will be continuing to build out your image library.
 
+## Let's make a panorama! ##
+
+This homework covers a lot, including finding keypoints in an image, describing those key points, matching them to those points in another image, computing the transform from one image to the other, and stitching them together into a panorama.
+
+The high-level algorithm is already done for you! You can find it near the bottom of `src/panorama_image.c`, it looks approximately like:
+
+
+    image panorama_image(image a, image b, float sigma, float thresh, int nms, float inlier_thresh, int iters, int cutoff)
+    {
+        // Calculate corners and descriptors
+        descriptor *ad = harris_corner_detector(a, sigma, thresh, nms, &an);
+        descriptor *bd = harris_corner_detector(b, sigma, thresh, nms, &bn);
+
+        // Find matches
+        match *m = match_descriptors(ad, an, bd, bn, &mn);
+
+        // Run RANSAC to find the homography
+        matrix H = RANSAC(m, mn, inlier_thresh, iters, cutoff);
+
+        // Stitch the images together with the homography
+        image comb = combine_images(a, b, H);
+        return comb;
+    }
+
+So we'll find the corner points in an image using a Harris corner detector. Then we'll match together the descriptors of those corners. We'll use RANSAC to estimate a projection from one image coordinate system to the other. Finally, we'll stitch together the images using this projection.
+
+First we need to find those corners!
+
+## 1. Harris corner detection ##
+
+
 ## IN PROGRESS ##
 
 ## 1. Image resizing ##
