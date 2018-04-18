@@ -73,7 +73,7 @@ Fill in the missing sections of `descriptor *harris_corner_detector(image im, fl
 After you complete this function you should be able to calculate corners and descriptors for an image! Try running:
 
     im = load_image("data/Rainier1.png")
-    detect_and_draw_corners(im, 2, 100, 3)
+    detect_and_draw_corners(im, 2, 50, 3)
     save_image(im, "corners")
 
 This will detect corners using a Gaussian window of 2 sigma, a "cornerness" threshold of 100, and an nms distance of 3 (or window of 7x7). It should give you something like this:
@@ -107,7 +107,7 @@ Once this is done we can show the matches we discover between the images:
 
     a = load_image("data/Rainier1.png")
     b = load_image("data/Rainier2.png")
-    m = find_and_draw_matches(a, b, 2, 100, 3)
+    m = find_and_draw_matches(a, b, 2, 50, 3)
     save_image(m, "matches")
 
 Which gives you:
@@ -161,7 +161,7 @@ With all this working you should be able to create some basic panoramas:
 
     im1 = load_image("data/Rainier1.png")
     im2 = load_image("data/Rainier2.png")
-    pan = panorama_image(im1, im2, thresh=100)
+    pan = panorama_image(im1, im2, thresh=50)
     save_image(pan, "easy_panorama")
 
 ![panorama](figs/easy_panorama.jpg)

@@ -2,19 +2,19 @@ from uwimg import *
 
 def draw_corners():
     im = load_image("data/Rainier1.png")
-    detect_and_draw_corners(im, 2, 100, 3)
+    detect_and_draw_corners(im, 2, 50, 3)
     save_image(im, "corners")
 
 def draw_matches():
     a = load_image("data/Rainier1.png")
     b = load_image("data/Rainier2.png")
-    m = find_and_draw_matches(a, b, 2, 100, 3)
+    m = find_and_draw_matches(a, b, 2, 50, 3)
     save_image(m, "matches")
 
 def easy_panorama():
     im1 = load_image("data/Rainier1.png")
     im2 = load_image("data/Rainier2.png")
-    pan = panorama_image(im1, im2, thresh=100)
+    pan = panorama_image(im1, im2, thresh=50)
     save_image(pan, "easy_panorama")
 
 def rainier_panorama():
@@ -24,11 +24,11 @@ def rainier_panorama():
     im4 = load_image("data/Rainier4.png")
     im5 = load_image("data/Rainier5.png")
     im6 = load_image("data/Rainier6.png")
-    pan = panorama_image(im5, im6, thresh=5)
+    pan = panorama_image(im1, im2, thresh=5)
     save_image(pan, "rainier_panorama_1")
-    pan2 = panorama_image(pan, im1, thresh=5)
+    pan2 = panorama_image(pan, im5, thresh=5)
     save_image(pan2, "rainier_panorama_2")
-    pan3 = panorama_image(pan2, im2, thresh=5)
+    pan3 = panorama_image(pan2, im6, thresh=5)
     save_image(pan3, "rainier_panorama_3")
     pan4 = panorama_image(pan3, im3, thresh=5)
     save_image(pan4, "rainier_panorama_4")
