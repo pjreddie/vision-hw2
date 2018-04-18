@@ -103,6 +103,18 @@ Each descriptor in `a` will only appear in one match. But several of them may ma
 
 To do this, sort the matches based on distance so shortest distance is first. I've already implemented a comparator for you to use, just look up how to properly apply `qsort` if you don't know already. Next, loop through the matches in order and keep track of which elements in `b` we've seen. If we see one for a second (or third, etc.) time, throw it out! To throw it out, just shift the other elements forward in the list and then remember how many one-to-one matches we have at the end. This can be done with a single pass through the data.
 
+Once this is done we can show the matches we discover between the images:
+
+    a = load_image("data/Rainier1.png")
+    b = load_image("data/Rainier2.png")
+    m = find_and_draw_matches(a, b, 2, 100, 3)
+    save_image(m, "matches")
+
+Which gives you:
+
+![matches](figs/matches.jpg)
+
+
 ## 3. Fitting our projection to the data ##
 
 Now that we have some matches we need to predict the projection between these two sets of points! However, this can be hard because we have a lot of noisy matches. Many of them are correct but we also have some outliers hiding in the data.
@@ -151,6 +163,8 @@ With all this working you should be able to create some basic panoramas:
     im2 = load_image("data/Rainier2.png")
     pan = panorama_image(im1, im2, thresh=100)
     save_image(pan, "easy_panorama")
+
+![panorama](figs/easy_panorama.jpg)
 
 Try out some of the other panorama creation in `trypanorama.py`.
 
