@@ -124,7 +124,7 @@ image cornerness_response(image S)
 {
     image R = make_image(S.w, S.h, 1);
     // TODO: fill in R, "cornerness" for each pixel using the structure matrix.
-    // We'll use formulation det(S) - alpha * trace(S), alpha = .06.
+    // We'll use formulation det(S) - alpha * trace(S)^2, alpha = .06.
     return R;
 }
 
