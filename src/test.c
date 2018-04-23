@@ -344,52 +344,34 @@ void test_sobel(){
     free(res);
 }
 
-void test_panorama()
+void test_structure()
 {
-//    image r1 = load_image("data/helens5.jpg");
-//    image r2 = load_image("data/helens6.jpg");
-//    image comb = panorama_image(r1, r2, 2, 10, 3, 5, 5000);
-//    save_png(comb, "comb");
-
-//    image im1 = load_image("data/sun1.jpg");
-//    image im2 = load_image("data/sun2.jpg");
-//    image im3 = load_image("data/sun3.jpg");
-//    image im4 = load_image("data/sun4.jpg");
-//    image im5 = load_image("data/sun5.jpg");
-//    image pan = panorama_image(im3, im4, 2, 5, 3, 2, 10000, 30);
-//    save_image(pan, "pan");
-
-    image im1 = load_image("data/Rainier1.png");
-    image im2 = load_image("data/Rainier2.png");
-    image im3 = load_image("data/Rainier3.png");
-    image im4 = load_image("data/Rainier4.png");
-    image im5 = load_image("data/Rainier5.png");
-    image im6 = load_image("data/Rainier6.png");
-
-
-    image pan = panorama_image(im5, im6, 2, 5, 3, 2, 10000, 30);
-    save_image(pan, "pan");
-    image pan2 = panorama_image(pan, im1, 2, 5, 3, 2, 10000, 30);
-    save_image(pan2, "pan2");
-    image pan3 = panorama_image(pan2, im2, 2, 5, 3, 2, 10000, 30);
-    save_image(pan3, "pan3");
-    image pan4 = panorama_image(pan3, im3, 2, 5, 3, 2, 10000, 30);
-    save_image(pan4, "pan4");
-    image pan5 = panorama_image(pan4, im4, 2, 5, 3, 2, 10000, 30);
-    save_image(pan5, "pan5");
-
+    image im = load_image("data/dogbw.png");
+    image s = structure_matrix(im, 2);
+    feature_normalize(s);
+    image gt = load_image("figs/structure.png");
+    TEST(same_image(s, gt));
+    free_image(im);
+    free_image(s);
+    free_image(gt);
 }
 
-int do_test()
+void test_cornerness()
 {
-    TEST('1' == '1');
-    TEST('0' == '1');
-    return 0;
+    image im = load_image("data/dogbw.png");
+    image s = structure_matrix(im, 2);
+    image c = cornerness_response(s);
+    feature_normalize(c);
+    image gt = load_image("figs/cornerness.png");
+    TEST(same_image(c, gt));
+    free_image(im);
+    free_image(s);
+    free_image(c);
+    free_image(gt);
 }
 
 void run_tests()
 {
-    /*
     //test_matrix();
     test_get_pixel();
     test_set_pixel();
@@ -410,8 +392,7 @@ void run_tests()
     test_hybrid_image();
     test_frequency_image();
     test_sobel();
-     */
-    test_panorama();
+    test_structure();
     printf("%d tests, %d passed, %d failed\n", tests_total, tests_total-tests_fail, tests_fail);
 }
 

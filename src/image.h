@@ -85,6 +85,8 @@ image colorize_sobel(image im);
 image smooth_image(image im, float sigma);
 
 // Harris and Stitching
+image structure_matrix(image im, float sigma);
+image cornerness_response(image S);
 void free_descriptors(descriptor *d, int n);
 image cylindrical_project(image im, float f);
 void mark_corners(image im, descriptor *d, int n);
