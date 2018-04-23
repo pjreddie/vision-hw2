@@ -362,7 +362,7 @@ void test_cornerness()
     image s = structure_matrix(im, 2);
     image c = cornerness_response(s);
     feature_normalize(c);
-    image gt = load_image("figs/cornerness.png");
+    image gt = load_image("figs/response.png");
     TEST(same_image(c, gt));
     free_image(im);
     free_image(s);
@@ -393,6 +393,7 @@ void run_tests()
     test_frequency_image();
     test_sobel();
     test_structure();
+    test_cornerness();
     printf("%d tests, %d passed, %d failed\n", tests_total, tests_total-tests_fail, tests_fail);
 }
 
