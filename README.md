@@ -166,18 +166,18 @@ With all this working you should be able to create some basic panoramas:
 
 ![panorama](figs/easy_panorama.jpg)
 
-Try out some of the other panorama creation in `trypanorama.py`.
+Try out some of the other panorama creation in `trypanorama.py`. If you stitch together multiple images you should turn off the `if` statement in `panorama_image` that marks corners and draws inliers.
 
-## 3.7 Map images to a cylinder to stitch larger field-of-view panoramas ##
+## Extra Credit ##
 
 Mapping all the images back to the same coordinates is bad for large field-of-view panoramas, as discussed in class. Implement `image cylindrical_project(image im, float f)` to project an image to cylindrical coordinates and then unroll it. Then stitch together some very big panoramas. Send in your favorite. Use your own images if you want!
 
-## Extra Credit ##
+## More Extra Credit ##
 
 Map images to spherical coordinates and stitch together a really big panorama! Will parts of it be upside-down??
 
 
 ## 4. Turn it in ##
 
-Turn in your `harris_image.c`, `panorama_image.c`, and some good panoramas you generated on canvas under Assignment 2.
+Turn in your `harris_image.c`, `panorama_image.c`, any changes you made to `trypanorama.py` and some good panoramas you generated on canvas under Assignment 2.
 
